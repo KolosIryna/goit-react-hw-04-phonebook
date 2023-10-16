@@ -16,13 +16,6 @@ export const App = () => {
   ]);
   const [filter, setFilter] = useState('');
 
-  // componentDidMount() {
-  //   const contacts = localStorage.getItem('contacts');
-  //   const parsedContacts = JSON.parse(contacts);
-  //   if (!parsedContacts) return;
-
-  //   this.setState({ contacts: parsedContacts });
-  // }
   useEffect(() => {
     const parsedContacts = JSON.parse(localStorage.getItem('contacts'));
     if (parsedContacts) {
@@ -30,11 +23,6 @@ export const App = () => {
     }
   }, []);
 
-  // componentDidUpdate(_, prevState) {
-  //   if (prevState.contacts !== this.state.contacts) {
-  //     localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-  //   }
-  // }
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
@@ -53,7 +41,7 @@ export const App = () => {
       id: nanoid(),
       ...formData,
     };
-    setContacts([...contacts, newContact]);
+    setContacts(prevContacts => [...prevContacts, newContact]);
   };
 
   const handleFilterChange = event => {
@@ -67,7 +55,9 @@ export const App = () => {
   };
 
   const hendleDeleteContact = contactId => {
-    setContacts(contacts.filter(contact => contact.id !== contactId));
+    setContacts(prevContacts =>
+      prevContacts.filter(contact => contact.id !== contactId)
+    );
   };
 
   return (

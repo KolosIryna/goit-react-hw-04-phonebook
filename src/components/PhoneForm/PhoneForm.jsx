@@ -13,9 +13,6 @@ export const PhoneForm = props => {
     } else if (name === 'number') {
       setNumber(value);
     }
-    // this.setState({
-    //   [event.target.name]: event.target.value,
-    // });
   };
 
   const handleSubmit = event => {
